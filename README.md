@@ -1,7 +1,6 @@
 # drassadnikov_infra
 drassadnikov Infra repository
 
-<<<<<<< Updated upstream
 #----- ДЗ к теме  "Знакомство с облачной инфраструктурой и облачными сервисами"
 #Выполнение:
 
@@ -429,7 +428,3 @@ appuser@reddit-app2:~$ ps aux | grep puma
 root      3210  0.0  0.6 516676 27928 ?        Sl   02:09   0:00 puma 3.10.0 (tcp://0.0.0.0:9292) [reddit]
 appuser   3372  0.0  0.0  14224   960 pts/0    S+   02:18   0:00 grep puma
 appuser@reddit-app2:~$
-=======
-testapp_IP = 51.250.67.53
-testapp_port = 9292
->>>>>>> Stashed changes
