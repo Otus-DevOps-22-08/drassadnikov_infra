@@ -350,3 +350,22 @@ Post successuly published
 PS D:\!OTUS\GitHub\drassadnikov_infra> git update-index --chmod=+x d:\!OTUS\GitHub\drassadnikov_infra\install_ruby.sh
 PS D:\!OTUS\GitHub\drassadnikov_infra> git update-index --chmod=+x d:\!OTUS\GitHub\drassadnikov_infra\install_mongodb.sh
 PS D:\!OTUS\GitHub\drassadnikov_infra> git update-index --chmod=+x d:\!OTUS\GitHub\drassadnikov_infra\deploy.sh
+
+Выполним commit + push:
+PS D:\!OTUS\GitHub\drassadnikov_infra> git commit -am "Task 4-drassadnikov"
+[cloud-testapp 2420c4a] Task 4-drassadnikov
+ 4 files changed, 4 insertions(+), 1 deletion(-)
+ mode change 100644 => 100755 deploy.sh
+ mode change 100644 => 100755 install_mongodb.sh
+ mode change 100644 => 100755 install_ruby.sh
+PS D:\!OTUS\GitHub\drassadnikov_infra> git push
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 411 bytes | 411.00 KiB/s, done.
+Total 3 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To https://github.com/Otus-DevOps-22-08/drassadnikov_infra.git
+   967a00f..2420c4a  cloud-testapp -> cloud-testapp
+PS D:\!OTUS\GitHub\drassadnikov_infra>
