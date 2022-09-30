@@ -346,4 +346,7 @@ https://travis-ci.org/
 
 Post successuly published
 
-Выдадим права на скрипты sh:
+Выдадим права execute на скрипты sh:
+PS D:\!OTUS\GitHub\drassadnikov_infra> git update-index --chmod=+x d:\!OTUS\GitHub\drassadnikov_infra\install_ruby.sh
+PS D:\!OTUS\GitHub\drassadnikov_infra> git update-index --chmod=+x d:\!OTUS\GitHub\drassadnikov_infra\install_mongodb.sh
+PS D:\!OTUS\GitHub\drassadnikov_infra> git update-index --chmod=+x d:\!OTUS\GitHub\drassadnikov_infra\deploy.sh
