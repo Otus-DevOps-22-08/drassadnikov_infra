@@ -369,3 +369,110 @@ remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
 To https://github.com/Otus-DevOps-22-08/drassadnikov_infra.git
    967a00f..2420c4a  cloud-testapp -> cloud-testapp
 PS D:\!OTUS\GitHub\drassadnikov_infra>
+
+#------------- ДЗ к теме "Модели управления инфраструктурой. Подготовка образов с помощью Packer"
+
+
+PS C:\Users\HOME> yc config list
+token: y0_AgAAAAALvgvzAATuwQAAAADPy4cGyfqeI7nxQ-ufz30CLGqQszcZTqY
+cloud-id: b1gorbtfqlahpr5802c4
+folder-id: b1gpf2ca5rpkbvk7phms
+compute-default-zone: ru-central1-a
+PS C:\Users\HOME>
+
+
+
+$SVC_ACCT="drassadnikov"
+$FOLDER_ID="b1gpf2ca5rpkbvk7phms"
+yc iam service-account create --name $SVC_ACCT --folder-id $FOLDER_ID
+
+PowerShell 7.2.6
+Copyright (c) Microsoft Corporation.
+
+https://aka.ms/powershell
+Type 'help' to get help.
+
+PS C:\Users\HOME> $SVC_ACCT="drassadnikov"
+PS C:\Users\HOME> $FOLDER_ID="b1gpf2ca5rpkbvk7phms"
+PS C:\Users\HOME> yc iam service-account create --name $SVC_ACCT --folder-id $FOLDER_ID
+id: ajefc02afilbi8mm4mtk
+folder_id: b1gpf2ca5rpkbvk7phms
+created_at: "2022-09-27T04:06:31.673495073Z"
+name: drassadnikov
+
+PS C:\Users\HOME>
+
+
+$ACCT_ID=$(yc iam service-account get $SVC_ACCT | grep ^id | awk '{print $2}')
+yc resource-manager folder add-access-binding --id b1gpf2ca5rpkbvk7phms --role editor --service-account-id ajefc02afilbi8mm4mtk
+
+
+
+PS C:\Users\HOME> yc iam service-account list
++----------------------+--------------+
+|          ID          |     NAME     |
++----------------------+--------------+
+| ajebut28s1ln8lndo0v1 | appuser      |
+| ajeecntc5n1v4ldubqft | drassadnikov |
++----------------------+--------------+
+
+yc resource-manager folder add-access-binding --id b1gpf2ca5rpkbvk7phms --role editor --service-account-id ajeecntc5n1v4ldubqft
+
+PS C:\Users\HOME> yc resource-manager folder add-access-binding --id b1gpf2ca5rpkbvk7phms --role editor --service-account-id ajeecntc5n1v4ldubqft
+done (1s)
+PS C:\Users\HOME>
+
+PS C:\Users\HOME> yc iam key create --service-account-id ajeecntc5n1v4ldubqft --output d:\!OTUS\GitHub\drassadnikov_infra\key.json
+id: ajenoftpsii8tdmptith
+service_account_id: ajeecntc5n1v4ldubqft
+created_at: "2022-10-04T21:22:06.972930168Z"
+key_algorithm: RSA_2048
+
+PS D:\!OTUS\GitHub\drassadnikov_infra\packer> packer validate ./ubuntu16.json
+The configuration is valid.
+
+PS D:\!OTUS\GitHub\drassadnikov_infra\packer> packer build ./ubuntu16.json
+yandex: output will be in this color.
+
+==> yandex: Creating temporary RSA SSH key for instance...
+==> yandex: Using as source image: fd8ip4qsne4vvmq4rnm5 (name: "ubuntu-16-04-lts-v20221003", family: "ubuntu-1604-lts")
+==> yandex: Creating network...
+==> yandex: Error creating network: server-request-id = 82b98164-3c1a-441e-9961-6aebd4e56e9a server-trace-id = e8691986440ba5c1:d0df7cd552fe5dc1:e8691986440ba5c1:1 client-request-id = a82813fb-8310-421c-866a-3191567d4421 client-trace-id = 3de0300b-bdce-43a5-bdd5-a3885629774e rpc error: code = ResourceExhausted desc = Quota limit vpc.networks.count exceeded
+Build 'yandex' errored after 6 seconds 169 milliseconds: Error creating network: server-request-id = 82b98164-3c1a-441e-9961-6aebd4e56e9a server-trace-id = e8691986440ba5c1:d0df7cd552fe5dc1:e8691986440ba5c1:1 client-request-id = a82813fb-8310-421c-866a-3191567d4421 client-trace-id = 3de0300b-bdce-43a5-bdd5-a3885629774e rpc error: code = ResourceExhausted desc = Quota limit vpc.networks.count exceeded
+
+==> Wait completed after 6 seconds 170 milliseconds
+
+==> Some builds didn't complete successfully and had errors:
+--> yandex: Error creating network: server-request-id = 82b98164-3c1a-441e-9961-6aebd4e56e9a server-trace-id = e8691986440ba5c1:d0df7cd552fe5dc1:e8691986440ba5c1:1 client-request-id = a82813fb-8310-421c-866a-3191567d4421 client-trace-id = 3de0300b-bdce-43a5-bdd5-a3885629774e rpc error: code = ResourceExhausted desc = Quota limit vpc.networks.count exceeded
+
+==> Builds finished but no artifacts were created.
+PS D:\!OTUS\GitHub\drassadnikov_infra\packer>
+
+
+PS D:\!OTUS\GitHub\drassadnikov_infra\packer> ssh -i ~/.ssh/appuser appuser@51.250.9.219
+The authenticity of host '51.250.9.219 (51.250.9.219)' can't be established.
+ECDSA key fingerprint is SHA256:nlJwtptko075+pVI1dO1+aRtJWO+BZP+4mcwqkCWYFE.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '51.250.9.219' (ECDSA) to the list of known hosts.
+Welcome to Ubuntu 16.04.7 LTS (GNU/Linux 4.4.0-142-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+appuser@fhm83fvvn0nb0qdl6cn7:~$
+
+PS D:\!OTUS\GitHub\drassadnikov_infra\packer> packer build -var-file="variables.json" ubuntu16.json
+
+PS D:\!OTUS\GitHub\drassadnikov_infra\packer> packer validate -var-file="variables.json" ./immutable.json
+The configuration is valid.
+
+yc compute instance create --name reddit-full --hostname reddit-full --memory=4 --create-boot-disk folder-id=b1gpf2ca5rpkbvk7phms,size=10GB --network-interface subnet-name=default-ru-central1-a,nat-ip-version=ipv4 --metadata serial-port-enable=1 --ssh-key appuser.pub
+
