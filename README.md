@@ -476,3 +476,84 @@ The configuration is valid.
 
 yc compute instance create --name reddit-full --hostname reddit-full --memory=4 --create-boot-disk folder-id=b1gpf2ca5rpkbvk7phms,size=10GB --network-interface subnet-name=default-ru-central1-a,nat-ip-version=ipv4 --metadata serial-port-enable=1 --ssh-key appuser.pub
 
+#------------- ДЗ к теме "Знакомство с Terraform"
+
+[redos@redos terraform]$ yc config list
+token: y0_AgAAAAALvgvzAATuwQAAAADPy4cGyfqeI7nxQ-ufz30CLGqQszcZTqY
+cloud-id: b1gorbtfqlahpr5802c4
+folder-id: b1gpf2ca5rpkbvk7phms
+compute-default-zone: ru-central1-a
+
+[redos@redos terraform]$ terraform apply -auto-approve
+
+[redos@redos terraform]$ terraform show | grep nat_ip_address
+nat_ip_address     = "51.250.73.15"
+
+[redos@redos terraform]$ yc config list
+token: y0_AgAAAAALvgvzAATuwQAAAADPy4cGyfqeI7nxQ-ufz30CLGqQszcZTqY
+cloud-id: b1gorbtfqlahpr5802c4
+folder-id: b1gpf2ca5rpkbvk7phms
+compute-default-zone: ru-central1-a
+
+
+resource "yandex_compute_instance" "app" {
+...
+metadata = {
+ssh-keys = "ubuntu:${file("~/.ssh/yc.pub")}"
+}
+...
+
+[redos@redos terraform]$ terraform destroy -auto-approve
+
+[redos@redos terraform]$ terraform apply -auto-approve
+
+[redos@redos terraform]$ ssh ubuntu@84.201.131.92
+The authenticity of host '84.201.131.92 (84.201.131.92)' can't be established.
+ED25519 key fingerprint is SHA256:VaN6cB9Np8Hvx9xbea6BVJTi3Ykf0Cdp3lWHuXEaavY.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '84.201.131.92' (ED25519) to the list of known hosts.
+Welcome to Ubuntu 16.04.7 LTS (GNU/Linux 4.4.0-142-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+ubuntu@fhmctip3k7dqcdjfchjl:~$ 
+
+
+[redos@redos terraform]$ terraform refresh
+yandex_compute_instance.app: Refreshing state... [id=fhmctip3k7dqcdjfchjl]
+
+Outputs:
+
+external_ip_address_app = "84.201.131.92"
+[redos@redos terraform]$ terraform output
+external_ip_address_app = "84.201.131.92"
+[redos@redos terraform]$ terraform output external_ip_address_app
+"84.201.131.92"
+[redos@redos terraform]$ 
+
+ terraform taint yandex_compute_instance.app
+Resource instance yandex_compute_instance.app has been marked as tainted.
+
+
+
+
+external_ip_address_app = "51.250.88.45"
+
+http://51.250.88.45:9292/
+
+Post successuly published
+
+Отформатируйте все конфигурационные файлы используя
+команду terraform fmt;
+
+[redos@redos terraform]$ terraform fmt -recursive
+
+
+Outputs:
+Созданы instances reddit-base из образа "fd85rjds6es4ta4aagpp" с переменной count:
+   1. reddit-app-0 ```http://51.250.71.23:9292/
+   2. reddit-app-1 ```http://51.250.64.139:9292/
+   3. load_balancer_ip_address: ```http://51.250.7.54/
+

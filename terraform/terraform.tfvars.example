@@ -1,0 +1,10 @@
+instance_count           = 2
+cloud_id                 = "b1gorbtfqlahpr5802c4"
+folder_id                = "b1gpf2ca5rpkbvk7phms"
+zone                     = "ru-central1-a"
+image_id                 = "fd85rjds6es4ta4aagpp"
+public_key_path          = "~/.ssh/yc.pub"
+private_key_path         = "~/.ssh/yc"
+subnet_id                = "e9bjuql91rj8npqrnkf0"
+service_account_key_file = "key.json"
+
