@@ -1,4 +1,4 @@
-instance_count           = 2
+instance_count           = 1
 cloud_id                 = "b1gorbtfqlahpr5802c4"
 folder_id                = "b1gpf2ca5rpkbvk7phms"
 zone                     = "ru-central1-a"
