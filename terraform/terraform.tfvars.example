@@ -7,4 +7,6 @@ public_key_path          = "~/.ssh/yc.pub"
 private_key_path         = "~/.ssh/yc"
 subnet_id                = "e9bjuql91rj8npqrnkf0"
 service_account_key_file = "key.json"
+app_disk_image           = "777"
+db_disk_image            = "777"
 
