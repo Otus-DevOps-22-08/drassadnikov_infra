@@ -557,3 +557,16 @@ Outputs:
    2. reddit-app-1 ```http://51.250.64.139:9292/
    3. load_balancer_ip_address: ```http://51.250.7.54/
 
+
+#------------- ДЗ к теме "Знакомство с Terraform-2"
+
+
+yc iam access-key create --service-account-name drassadnikov --description "this key is for my bucket"
+access_key:
+  id: ajeodlikv5joqdgkp439
+  service_account_id: ajeboklp8j94qbhsc7e4
+  created_at: "2023-01-16T01:45:06.781817123Z"
+  description: this key is for my bucket
+  key_id: YCAJEcoJme8fBDMzorm-q19Ay
+secret: YCNcoZod-AWqPTvph5SKtFUgcAav51iDpd1b6Gzg
+
