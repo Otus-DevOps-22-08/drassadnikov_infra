@@ -2,8 +2,8 @@
 	"builders": [{
 		"type": "yandex",
 		"service_account_key_file": "key.json",
-		"folder_id": "{{user `folder_id`}}",
-		"source_image_family": "{{user `source_image_family`}}",
+		"folder_id": "b1gpf2ca5rpkbvk7phms",
+		"source_image_family": "ubuntu-1604-lts",
 		"image_name": "reddit-full-{{timestamp}}",
 		"image_family": "reddit-full",
 		"instance_cores": 2,
@@ -27,6 +27,11 @@
 			"type": "shell",
 			"script": "files/install.sh",
 			"execute_command": "sudo {{.Path}}"
-		}       
+		},
+		{
+			"type": "shell",
+			"script": "scripts/add_appuser.sh",
+			"execute_command": "sudo {{.Path}}"
+		}    
 	]
 }

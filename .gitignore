@@ -5,3 +5,4 @@ packer/key.pem
 *.tfstate.backup
 *.tfvars
 .terraform/
+*.retry

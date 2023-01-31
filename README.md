@@ -944,3 +944,63 @@ reddit-app-0 | CHANGED | rc=0 >>
 7. Написан плейбук clone.yml.
 
 
+#------------- ДЗ к теме "9.Продолжение знакомства с Ansible: templates, handlers, dynamic inventory, vault, tags"
+
+[redos@redos ansible]$ ansible-playbook reddit_app.yml --check --limit db
+
+PLAY [Configure hosts & deploy application] ********************************************************************************************************
+
+TASK [Gathering Facts] *****************************************************************************************************************************
+ok: [reddit-db-0]
+
+TASK [Change mongo config file] ********************************************************************************************************************
+changed: [reddit-db-0]
+
+RUNNING HANDLER [restart mongod] *******************************************************************************************************************
+changed: [reddit-db-0]
+
+PLAY RECAP *****************************************************************************************************************************************
+reddit-db-0                : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+[redos@redos ansible]$ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
