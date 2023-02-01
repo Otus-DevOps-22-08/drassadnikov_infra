@@ -1,7 +1,7 @@
 {
   "builders": [{
     "type": "yandex",
-    "service_account_key_file": "key.json",
+    "service_account_key_file": "{{user `service_account_key_file`}}",
     "folder_id": "{{user `folder_id`}}",
     "source_image_family": "{{user `source_image_family`}}",
     "image_name": "app-{{timestamp}}",
@@ -14,9 +14,9 @@
   }],
   "provisioners": [
     {
-      "type": "ansible",
-      "playbook_file": "ansible/packer_app.yml",
-      "user": "ubuntu"
+      "type": "shell",
+      "script": "scripts/install_ruby.sh",
+      "execute_command": "sudo {{.Path}}"
     }
   ]
 }
