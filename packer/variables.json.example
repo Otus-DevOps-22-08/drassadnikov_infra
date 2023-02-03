@@ -2,7 +2,7 @@
   "service_account_key_file": "key.json",
   "image_labels": "image:label",
   "zone": "ru-central1-a",
-  "folder_id": "22222222",
+  "folder_id": "222222222",
   "image_name": "reddit-base-{{timestamp}}",
   "source_image_family": "ubuntu-1604-lts",
   "image_family": "reddit-base",
