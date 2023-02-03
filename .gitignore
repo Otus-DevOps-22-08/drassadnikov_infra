@@ -1,8 +1,11 @@
 packer/variables.json
-packer/key.pem
+packer/files/immutable_variables.json
+packer/yc_yandex.pem
 *.tfstate
 *.tfstate.*.backup
 *.tfstate.backup
 *.tfvars
 .terraform/
+terraform/.terraform/
 *.retry
+jdauphant.nginx
